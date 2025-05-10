@@ -102,21 +102,23 @@
       $(function() {
         function filteringCategory() {
           var selectedCategory = $('.select').val();
-          $('.list li').each(function(index, element) {
-            var dataCategory = $(element).data('category-type');
-
-            if(selectedCategory === 'all' || dataCategory === selectedCategory) {
-              $(element).show();
+            if (selectedCategory === 'all') {
+              $('.list li').show();
             } else {
-              $(element).hide();
+            $('.list li').each(function(index, element) {
+              var dataCategory = $(element).data('category-type');
+                if(dataCategory === selectedCategory) {
+                  $(element).show();
+                } else {
+                  $(element).hide();
+                }
+              });
             }
-          });
-        }
+          };
         $('select').change(function() {
           filteringCategory();
         });
       });
-
     </script>
   </body>
 </html>
