@@ -23,27 +23,25 @@
           url: `https://pokeapi.co/api/v2/pokemon/${randomId}`,
           method: 'GET'
         }).done(function(res) {
-          console.log(res.species.url);
-          console.log(res.sprites.front_default);
           $.ajax({
           url: `https://pokeapi.co/api/v2/pokemon-species/${randomId}/`,
           method: 'GET'
-        }).done(function(speciesRes) {
-          let japaneseName = speciesRes.names.find(name => name.language.name === 'ja').name;
-          let encountHtml = `
-            <p class="name">${japaneseName}</p>
-            <div>
-              <img class="img" src="${res.sprites.front_default}" alt="${japaneseName}">
-            </div>
-            <div>
-              <button class="btn" id="catch">捕まえる</button>
-            <button class="btn" data-js="reset">逃げる</button>
-            </div>
-          `;
-          $('.wrapper').html(encountHtml);
-        }).fail(function(err) {
-          console.error('詳細データの取得失敗', err);
-        });
+          }).done(function(speciesRes) {
+            let japaneseName = speciesRes.names.find(name => name.language.name === 'ja').name;
+            let encountHtml = `
+              <p class="name">${japaneseName}</p>
+              <div>
+                <img class="img" src="${res.sprites.front_default}" alt="${japaneseName}">
+              </div>
+              <div>
+                <button class="btn" id="catch">捕まえる</button>
+              <button class="btn" data-js="reset">逃げる</button>
+              </div>
+            `;
+            $('.wrapper').html(encountHtml);
+          }).fail(function(err) {
+            console.error('詳細データの取得失敗', err);
+          });
         }).fail(function(err) {
           console.error('ポケモンの情報取得失敗', err);
         });
